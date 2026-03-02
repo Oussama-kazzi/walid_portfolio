@@ -1,50 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, toggleLanguage, t } = useContext(LanguageContext);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Education", href: "#education" },
-    { name: "Contact", href: "#contact" },
+    { name: t.nav.home, href: "#home" },
+    { name: t.nav.about, href: "#about" },
+    { name: t.nav.skills, href: "#skills" },
+    { name: t.nav.projects, href: "#projects" },
+    { name: t.nav.education, href: "#education" },
+    { name: t.nav.contact, href: "#contact" },
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-white border-b-2 border-black z-50 shadow-sm">
+    <nav className="fixed top-0 w-full bg-gradient-to-r from-slate-950 to-slate-900 border-b border-orange-500/20 z-50 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <a
               href="#home"
-              className="text-2xl font-bold text-black hover:text-gray-700 transition-colors"
+              className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent hover:from-orange-400 hover:to-orange-300 transition-all"
             >
               WE
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-black font-medium hover:text-gray-600 transition-colors relative group"
+                className="text-white/80 font-medium hover:text-orange-500 transition-colors relative group"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-1 bg-orange-500/20 hover:bg-orange-500/30 text-orange-500 font-semibold border border-orange-500/50 rounded-md transition-all"
+            >
+              {language === "en" ? "FR" : "EN"}
+            </button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button & Language Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleLanguage}
+              className="px-2 py-1 text-xs bg-orange-500/20 hover:bg-orange-500/30 text-orange-500 font-semibold border border-orange-500/50 rounded-md transition-all"
+            >
+              {language === "en" ? "FR" : "EN"}
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-black hover:bg-gray-100 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-white/80 hover:text-orange-500 hover:bg-slate-800/50 focus:outline-none transition-colors"
             >
               <svg
                 className={`h-6 w-6 transition-transform ${isOpen ? "rotate-90" : ""}`}
@@ -66,14 +81,14 @@ export default function Navigation() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden border-t-2 border-black bg-white animate-fadeIn">
+        <div className="md:hidden border-t border-orange-500/20 bg-slate-900/95 backdrop-blur-md animate-fadeIn">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 rounded-md text-black font-medium hover:bg-gray-100 transition-colors"
+                className="block px-3 py-2 rounded-md text-white/80 font-medium hover:bg-slate-800 hover:text-orange-500 transition-colors"
               >
                 {link.name}
               </a>

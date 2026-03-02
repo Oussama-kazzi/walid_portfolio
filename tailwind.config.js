@@ -3,6 +3,23 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      colors: {
+        dark: {
+          50: "#f8f9fa",
+          100: "#f1f3f5",
+          200: "#e9ecef",
+          300: "#dee2e6",
+          400: "#ced4da",
+          500: "#adb5bd",
+          600: "#868e96",
+          700: "#495057",
+          800: "#343a40",
+          900: "#1a1d23",
+          950: "#0f1117",
+        },
+        accent: "#ff8c42",
+        accentDark: "#ff7a1f",
+      },
       keyframes: {
         float: {
           "0%": { transform: "translateY(0px)" },
@@ -30,9 +47,10 @@ export default {
           "0%": { transform: "scale(0.9)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
         },
-        underline: {
-          "0%": { width: "0%" },
-          "100%": { width: "100%" },
+        glow: {
+          "0%": { boxShadow: "0 0 5px rgba(255, 140, 66, 0.5)" },
+          "50%": { boxShadow: "0 0 20px rgba(255, 140, 66, 0.8)" },
+          "100%": { boxShadow: "0 0 5px rgba(255, 140, 66, 0.5)" },
         },
       },
       animation: {
@@ -42,7 +60,11 @@ export default {
         fadeInUp: "fadeInUp 0.6s ease-out",
         slideIn: "slideIn 0.6s ease-out",
         scaleIn: "scaleIn 0.6s ease-out",
-        underline: "underline 0.3s ease-out",
+        glow: "glow 3s ease-in-out infinite",
+      },
+      backgroundImage: {
+        "gradient-dark": "linear-gradient(135deg, #1a1d23 0%, #2d2f37 100%)",
+        "gradient-orange": "linear-gradient(135deg, #ff8c42 0%, #ff7a1f 100%)",
       },
     },
   },

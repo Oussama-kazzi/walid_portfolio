@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
 
-// Minimalist SVG Icons
+// Minimalist SVG Icons - Orange theme
 const PhotoshopIcon = () => (
   <svg
     className="w-16 h-16 transition-transform group-hover:scale-110"
     viewBox="0 0 100 100"
     fill="none"
-    stroke="black"
+    stroke="currentColor"
     strokeWidth="2"
   >
     <rect x="10" y="10" width="80" height="80" rx="5" />
@@ -21,7 +22,7 @@ const IllustratorIcon = () => (
     className="w-16 h-16 transition-transform group-hover:scale-110"
     viewBox="0 0 100 100"
     fill="none"
-    stroke="black"
+    stroke="currentColor"
     strokeWidth="2"
   >
     <rect x="10" y="10" width="80" height="80" rx="5" />
@@ -36,7 +37,7 @@ const InDesignIcon = () => (
     className="w-16 h-16 transition-transform group-hover:scale-110"
     viewBox="0 0 100 100"
     fill="none"
-    stroke="black"
+    stroke="currentColor"
     strokeWidth="2"
   >
     <rect x="10" y="10" width="80" height="80" rx="5" />
@@ -53,7 +54,7 @@ const PrintIcon = () => (
     className="w-16 h-16 transition-transform group-hover:scale-110"
     viewBox="0 0 100 100"
     fill="none"
-    stroke="black"
+    stroke="currentColor"
     strokeWidth="2"
   >
     <rect x="15" y="20" width="70" height="60" rx="3" />
@@ -69,13 +70,17 @@ const ColorIcon = () => (
     className="w-16 h-16 transition-transform group-hover:scale-110"
     viewBox="0 0 100 100"
     fill="none"
-    stroke="black"
+    stroke="currentColor"
     strokeWidth="2"
   >
     <circle cx="50" cy="50" r="35" />
-    <circle cx="50" cy="50" r="10" fill="black" />
-    <path d="M 50 25 L 60 35 L 50 45 L 40 35 Z" fill="black" />
-    <path d="M 75 50 L 65 60 L 55 50 L 65 40 Z" fill="black" opacity="0.5" />
+    <circle cx="50" cy="50" r="10" fill="currrentColor" />
+    <path d="M 50 25 L 60 35 L 50 45 L 40 35 Z" fill="currentColor" />
+    <path
+      d="M 75 50 L 65 60 L 55 50 L 65 40 Z"
+      fill="currentColor"
+      opacity="0.5"
+    />
   </svg>
 );
 
@@ -84,121 +89,100 @@ const QualityIcon = () => (
     className="w-16 h-16 transition-transform group-hover:scale-110"
     viewBox="0 0 100 100"
     fill="none"
-    stroke="black"
+    stroke="currentColor"
     strokeWidth="2"
   >
     <path d="M 50 10 L 90 25 L 90 50 C 90 75 50 90 50 90 C 50 90 10 75 10 50 L 10 25 Z" />
-    <path d="M 35 50 L 45 60 L 65 40" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M 35 50 L 45 60 L 65 40"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
 export default function SkillsSection() {
+  const { t } = useContext(LanguageContext);
+
   return (
-    <section className="w-full py-20 px-4 bg-white">
+    <section className="w-full py-20 px-4 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-black mb-12 text-center border-b-2 border-black pb-4 animate-fadeIn">
-          Skills
+        <h2 className="text-4xl font-bold text-white mb-12 text-center border-b border-orange-500/30 pb-4 animate-fadeIn">
+          {t.skills.title}
         </h2>
 
         {/* Technical Tools */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold text-black mb-10 text-center">
+          <h3 className="text-2xl font-bold text-white mb-10 text-center">
             Design & Print Tools
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {/* Adobe Photoshop */}
-            <div className="group flex flex-col items-center justify-center p-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-xl animate-fadeInUp"
-              style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
-              <PhotoshopIcon />
-              <p className="mt-6 font-semibold text-center text-lg">Adobe Photoshop</p>
-              <p className="mt-2 text-sm opacity-75">Digital Editing</p>
-            </div>
-
-            {/* Adobe Illustrator */}
-            <div className="group flex flex-col items-center justify-center p-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-xl animate-fadeInUp"
-              style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
-              <IllustratorIcon />
-              <p className="mt-6 font-semibold text-center text-lg">Adobe Illustrator</p>
-              <p className="mt-2 text-sm opacity-75">Vector Graphics</p>
-            </div>
-
-            {/* Adobe InDesign */}
-            <div className="group flex flex-col items-center justify-center p-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-xl animate-fadeInUp"
-              style={{ animationDelay: '0.3s', animationFillMode: 'both' }}>
-              <InDesignIcon />
-              <p className="mt-6 font-semibold text-center text-lg">Adobe InDesign</p>
-              <p className="mt-2 text-sm opacity-75">Page Layout</p>
-            </div>
+            {t.skills.profesional.slice(0, 3).map((skill, idx) => {
+              const icons = [PhotoshopIcon, IllustratorIcon, InDesignIcon];
+              const Icon = icons[idx];
+              return (
+                <div
+                  key={idx}
+                  className="group flex flex-col items-center justify-center p-8 dark-card rounded-xl hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp text-orange-500"
+                  style={{
+                    animationDelay: `${0.1 + idx * 0.1}s`,
+                    animationFillMode: "both",
+                  }}
+                >
+                  <Icon />
+                  <p className="mt-6 font-semibold text-center text-lg text-white">
+                    {skill.name}
+                  </p>
+                  <p className="mt-2 text-sm opacity-60">{skill.desc}</p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Specialized Skills */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Digital Printing */}
-            <div className="group flex flex-col items-center justify-center p-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-xl animate-fadeInUp"
-              style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
-              <PrintIcon />
-              <p className="mt-6 font-semibold text-center text-lg">Digital Printing</p>
-              <p className="mt-2 text-sm opacity-75">Print Production</p>
-            </div>
-
-            {/* Color Management */}
-            <div className="group flex flex-col items-center justify-center p-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-xl animate-fadeInUp"
-              style={{ animationDelay: '0.5s', animationFillMode: 'both' }}>
-              <ColorIcon />
-              <p className="mt-6 font-semibold text-center text-lg">Color Management</p>
-              <p className="mt-2 text-sm opacity-75">Color Theory</p>
-            </div>
-
-            {/* Quality Control */}
-            <div className="group flex flex-col items-center justify-center p-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-xl animate-fadeInUp"
-              style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
-              <QualityIcon />
-              <p className="mt-6 font-semibold text-center text-lg">Quality Control</p>
-              <p className="mt-2 text-sm opacity-75">Standards & Testing</p>
-            </div>
+            {t.skills.profesional.slice(3).map((skill, idx) => {
+              const icons = [PrintIcon, ColorIcon, QualityIcon];
+              const Icon = icons[idx];
+              return (
+                <div
+                  key={idx + 3}
+                  className="group flex flex-col items-center justify-center p-8 dark-card rounded-xl hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp text-orange-500"
+                  style={{
+                    animationDelay: `${0.4 + idx * 0.1}s`,
+                    animationFillMode: "both",
+                  }}
+                >
+                  <Icon />
+                  <p className="mt-6 font-semibold text-center text-lg text-white">
+                    {skill.name}
+                  </p>
+                  <p className="mt-2 text-sm opacity-60">{skill.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         {/* Languages */}
         <div>
-          <h3 className="text-2xl font-bold text-black mb-10 text-center">
-            Languages
+          <h3 className="text-2xl font-bold text-white mb-10 text-center">
+            {t.skills.title === "Skills" ? "Languages" : "Langues"}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-            <div className="p-6 border-2 border-black rounded-lg text-center hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-lg animate-fadeInUp"
-              style={{ animationDelay: '0.7s', animationFillMode: 'both' }}>
-              <p className="font-bold text-lg">Arabic</p>
-              <p className="text-sm opacity-75 mt-2">Native</p>
-              <div className="mt-3 w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-black h-2 rounded-full" style={{ width: '100%' }}></div>
+            {t.skills.languages.map((lang, idx) => (
+              <div
+                key={idx}
+                className="p-6 dark-card rounded-lg text-center hover:border-orange-500 hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1 animate-fadeInUp"
+                style={{
+                  animationDelay: `${0.7 + idx * 0.1}s`,
+                  animationFillMode: "both",
+                }}
+              >
+                <p className="font-bold text-lg text-white">{lang.name}</p>
+                <p className="text-sm text-orange-500/70 mt-2">{lang.level}</p>
               </div>
-            </div>
-            <div className="p-6 border-2 border-black rounded-lg text-center hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-lg animate-fadeInUp"
-              style={{ animationDelay: '0.8s', animationFillMode: 'both' }}>
-              <p className="font-bold text-lg">French</p>
-              <p className="text-sm opacity-75 mt-2">Fluent</p>
-              <div className="mt-3 w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-black h-2 rounded-full" style={{ width: '85%' }}></div>
-              </div>
-            </div>
-            <div className="p-6 border-2 border-black rounded-lg text-center hover:bg-black hover:text-white transition-all duration-300 transform hover:shadow-lg animate-fadeInUp"
-              style={{ animationDelay: '0.9s', animationFillMode: 'both' }}>
-              <p className="font-bold text-lg">English</p>
-              <p className="text-sm opacity-75 mt-2">Proficient</p>
-              <div className="mt-3 w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-black h-2 rounded-full" style={{ width: '80%' }}></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-            <div className="p-4 border-2 border-black rounded text-center">
-              <p className="font-semibold">English</p>
-              <p className="text-sm text-gray-700">Bien</p>
-            </div>
+            ))}
           </div>
         </div>
       </div>
