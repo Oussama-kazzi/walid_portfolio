@@ -20,11 +20,12 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a
-              href="#home"
-              className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent hover:from-orange-400 hover:to-orange-300 transition-all"
-            >
-              WE
+            <a href="#home" className="block">
+              <img
+                src="/images/logo.png"
+                alt="Walid Elmansouri logo"
+                className="h-10 w-auto object-contain transition-opacity hover:opacity-80"
+              />
             </a>
           </div>
 

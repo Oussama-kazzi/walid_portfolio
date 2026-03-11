@@ -1,12 +1,40 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import { projectCategories, projects } from "../data/projects";
 
+const SS_SCROLL = "projects-scroll";
+const SS_CATEGORY = "projects-category";
+const SS_PAGE = "projects-page";
+
 export default function ProjectsSection() {
   const { t, language } = useContext(LanguageContext);
-  const [activeCategory, setActiveCategory] = useState("logos");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [activeCategory, setActiveCategory] = useState(
+    () => sessionStorage.getItem(SS_CATEGORY) || "logos",
+  );
+  const [currentPage, setCurrentPage] = useState(() =>
+    parseInt(sessionStorage.getItem(SS_PAGE) || "1", 10),
+  );
+
+  // Restore exact scroll position when returning from a project detail
+  useEffect(() => {
+    const savedY = sessionStorage.getItem(SS_SCROLL);
+    if (savedY !== null) {
+      const id = setTimeout(() => {
+        window.scrollTo({ top: parseInt(savedY, 10), behavior: "instant" });
+        sessionStorage.removeItem(SS_SCROLL);
+        sessionStorage.removeItem(SS_CATEGORY);
+        sessionStorage.removeItem(SS_PAGE);
+      }, 0);
+      return () => clearTimeout(id);
+    }
+  }, []);
+
+  const saveScrollState = () => {
+    sessionStorage.setItem(SS_SCROLL, String(window.scrollY));
+    sessionStorage.setItem(SS_CATEGORY, activeCategory);
+    sessionStorage.setItem(SS_PAGE, String(currentPage));
+  };
   const projectsPerPage = 4;
 
   const filteredProjects = useMemo(
@@ -91,6 +119,7 @@ export default function ProjectsSection() {
                     <div className="flex justify-end">
                       <Link
                         to={`/projects/${project.id}`}
+                        onClick={saveScrollState}
                         className="w-10 h-10 rounded-full border border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white transition-all duration-300 flex items-center justify-center"
                         aria-label={
                           language === "en"
