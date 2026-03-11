@@ -66,6 +66,7 @@ export default function ProjectDetailsPage() {
                   src={imageSrc}
                   alt={`${language === "en" ? project.titleEn : project.titleFr} ${index + 1}`}
                   className="w-full h-[300px] md:h-[420px] object-contain hover:scale-[1.01] transition-transform cursor-zoom-in"
+                  loading="lazy"
                 />
               </button>
             ))}
@@ -104,6 +105,7 @@ export default function ProjectDetailsPage() {
             alt={language === "en" ? project.titleEn : project.titleFr}
             className="max-w-full max-h-[90vh] object-contain"
             onClick={(event) => event.stopPropagation()}
+            loading="eager"
           />
         </div>
       )}

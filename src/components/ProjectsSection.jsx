@@ -75,6 +75,7 @@ export default function ProjectsSection() {
                     src={project.image}
                     alt={language === "en" ? project.titleEn : project.titleFr}
                     className="w-full h-48 object-cover"
+                    loading="lazy"
                   />
 
                   <div className="p-6">

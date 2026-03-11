@@ -13,6 +13,7 @@ export default function HeroSection() {
               src="/images/walid.JPG"
               alt="Walid Elmansouri"
               className="w-full h-full object-cover object-top"
+              loading="eager"
             />
           </div>
         </div>
