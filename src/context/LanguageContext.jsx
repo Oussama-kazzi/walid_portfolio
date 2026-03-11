@@ -1,6 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const LanguageContext = createContext();
+
+const LANGUAGE_STORAGE_KEY = "portfolio-language";
 
 export const translations = {
   en: {
@@ -194,7 +196,21 @@ export const translations = {
 };
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => {
+    if (typeof window === "undefined") {
+      return "fr";
+    }
+
+    const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+
+    return savedLanguage === "en" || savedLanguage === "fr"
+      ? savedLanguage
+      : "fr";
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "en" ? "fr" : "en"));
