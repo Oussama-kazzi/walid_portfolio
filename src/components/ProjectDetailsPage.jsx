@@ -58,14 +58,14 @@ export default function ProjectDetailsPage() {
                 type="button"
                 key={imageSrc}
                 onClick={() => setSelectedImage(imageSrc)}
-                className={`rounded-xl overflow-hidden bg-slate-100 ${
+                className={`flex items-center justify-center rounded-xl bg-transparent ${
                   index === 0 ? "md:col-span-2" : ""
                 }`}
               >
                 <img
                   src={imageSrc}
                   alt={`${language === "en" ? project.titleEn : project.titleFr} ${index + 1}`}
-                  className="w-full h-[300px] md:h-[420px] object-contain hover:scale-[1.01] transition-transform cursor-zoom-in"
+                  className="block h-auto max-h-[420px] w-auto max-w-full rounded-xl border border-orange-500/20 bg-transparent hover:scale-[1.01] transition-transform cursor-zoom-in"
                   loading="lazy"
                 />
               </button>
@@ -103,7 +103,7 @@ export default function ProjectDetailsPage() {
           <img
             src={selectedImage}
             alt={language === "en" ? project.titleEn : project.titleFr}
-            className="max-w-full max-h-[90vh] object-contain"
+            className="block h-auto w-auto max-w-full max-h-[90vh] rounded-xl border border-orange-500/20 bg-transparent"
             onClick={(event) => event.stopPropagation()}
             loading="eager"
           />

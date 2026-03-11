@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Digital printing icon">
+  <defs>
+    <linearGradient id="m" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#7c8ea8"/>
+      <stop offset="1" stop-color="#d6deec"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0b1a2f"/>
+  <rect x="66" y="122" width="380" height="190" rx="24" fill="url(#m)"/>
+  <rect x="86" y="148" width="340" height="58" rx="12" fill="#9aa6c0"/>
+  <rect x="86" y="212" width="340" height="72" rx="10" fill="#1d2536"/>
+  <rect x="96" y="224" width="72" height="48" rx="6" fill="#7f68ee"/>
+  <rect x="168" y="224" width="72" height="48" rx="6" fill="#62d059"/>
+  <rect x="240" y="224" width="72" height="48" rx="6" fill="#5f8dff"/>
+  <rect x="312" y="224" width="72" height="48" rx="6" fill="#f4b440"/>
+  <rect x="384" y="224" width="42" height="48" rx="6" fill="#ea3f70"/>
+  <rect x="112" y="284" width="288" height="132" rx="22" fill="#e9edf6"/>
+  <path d="M120 300 C 170 300, 170 400, 220 400 C 270 400, 270 300, 320 300 C 370 300, 370 400, 420 400 L420 416 L112 416 Z" fill="#ec4373"/>
+  <path d="M120 300 C 158 300, 158 392, 196 392 C 234 392, 234 300, 272 300 C 310 300, 310 392, 348 392 C 386 392, 386 300, 420 300 L420 416 L112 416 Z" fill="#5c8efe" opacity="0.9"/>
+</svg>

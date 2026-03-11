@@ -38,8 +38,6 @@ export const translations = {
         { name: "Illustrator", desc: "Vector graphics" },
         { name: "InDesign", desc: "Layout & publishing" },
         { name: "Digital Printing", desc: "Print production" },
-        { name: "Color Management", desc: "Color accuracy" },
-        { name: "Quality Control", desc: "Standards & QA" },
       ],
       languages: [
         { name: "Arabic", level: "Native" },
@@ -133,8 +131,6 @@ export const translations = {
         { name: "Illustrator", desc: "Graphiques vectoriels" },
         { name: "InDesign", desc: "Mise en page & édition" },
         { name: "Impression Numérique", desc: "Production d'impression" },
-        { name: "Gestion des Couleurs", desc: "Précision des couleurs" },
-        { name: "Contrôle de Qualité", desc: "Normes & QA" },
       ],
       languages: [
         { name: "Arabe", level: "Natif" },

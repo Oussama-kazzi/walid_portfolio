@@ -65,44 +65,30 @@ const PrintIcon = () => (
   </svg>
 );
 
-const ColorIcon = () => (
-  <svg
-    className="w-16 h-16 transition-transform group-hover:scale-110"
-    viewBox="0 0 100 100"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <circle cx="50" cy="50" r="35" />
-    <circle cx="50" cy="50" r="10" fill="currrentColor" />
-    <path d="M 50 25 L 60 35 L 50 45 L 40 35 Z" fill="currentColor" />
-    <path
-      d="M 75 50 L 65 60 L 55 50 L 65 40 Z"
-      fill="currentColor"
-      opacity="0.5"
-    />
-  </svg>
-);
-
-const QualityIcon = () => (
-  <svg
-    className="w-16 h-16 transition-transform group-hover:scale-110"
-    viewBox="0 0 100 100"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M 50 10 L 90 25 L 90 50 C 90 75 50 90 50 90 C 50 90 10 75 10 50 L 10 25 Z" />
-    <path
-      d="M 35 50 L 45 60 L 65 40"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 export default function SkillsSection() {
   const { t } = useContext(LanguageContext);
+  const skillIcons = [
+    {
+      image: "/images/skills/photoshop.svg",
+      fallback: PhotoshopIcon,
+      alt: "Adobe Photoshop icon",
+    },
+    {
+      image: "/images/skills/illustrator.svg",
+      fallback: IllustratorIcon,
+      alt: "Adobe Illustrator icon",
+    },
+    {
+      image: "/images/skills/indesign.svg",
+      fallback: InDesignIcon,
+      alt: "Adobe InDesign icon",
+    },
+    {
+      image: "/images/skills/digital-print.svg",
+      fallback: PrintIcon,
+      alt: "Digital printing icon",
+    },
+  ];
 
   return (
     <section className="w-full py-20 px-4 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
@@ -113,51 +99,51 @@ export default function SkillsSection() {
 
         {/* Technical Tools */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold text-white mb-10 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 text-center">
             Design & Print Tools
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {t.skills.profesional.slice(0, 3).map((skill, idx) => {
-              const icons = [PhotoshopIcon, IllustratorIcon, InDesignIcon];
-              const Icon = icons[idx];
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+            {t.skills.profesional.map((skill, idx) => {
+              const iconConfig = skillIcons[idx] || skillIcons[3];
+              const FallbackIcon = iconConfig.fallback;
               return (
                 <div
-                  key={idx}
-                  className="group flex flex-col items-center justify-center p-8 dark-card rounded-xl hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp text-orange-500"
+                  key={skill.name}
+                  className="group relative overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-br from-[#1a1d23]/95 to-[#2b2f38]/90 p-7 md:p-8 text-orange-500 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-orange-400/70 hover:shadow-[0_18px_50px_rgba(255,140,66,0.2)] animate-fadeInUp"
                   style={{
                     animationDelay: `${0.1 + idx * 0.1}s`,
                     animationFillMode: "both",
                   }}
                 >
-                  <Icon />
-                  <p className="mt-6 font-semibold text-center text-lg text-white">
+                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-orange-500/10 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="inline-flex h-7 items-center rounded-full border border-orange-500/35 px-3 text-xs tracking-wide text-orange-300/90">
+                    {`0${idx + 1}`.slice(-2)}
+                  </span>
+                  <div className="mt-6 flex justify-center">
+                    <img
+                      src={iconConfig.image}
+                      alt={iconConfig.alt}
+                      className="h-16 w-16 object-contain transition-transform duration-300 group-hover:scale-110"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        const fallback = e.currentTarget.nextElementSibling;
+                        if (fallback) {
+                          fallback.style.display = "block";
+                        }
+                      }}
+                    />
+                    <div style={{ display: "none" }}>
+                      <FallbackIcon />
+                    </div>
+                  </div>
+                  <p className="mt-6 font-semibold text-center text-xl text-white">
                     {skill.name}
                   </p>
-                  <p className="mt-2 text-sm opacity-60">{skill.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Specialized Skills */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {t.skills.profesional.slice(3).map((skill, idx) => {
-              const icons = [PrintIcon, ColorIcon, QualityIcon];
-              const Icon = icons[idx];
-              return (
-                <div
-                  key={idx + 3}
-                  className="group flex flex-col items-center justify-center p-8 dark-card rounded-xl hover:border-orange-500 hover:shadow-xl hover:shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-2 animate-fadeInUp text-orange-500"
-                  style={{
-                    animationDelay: `${0.4 + idx * 0.1}s`,
-                    animationFillMode: "both",
-                  }}
-                >
-                  <Icon />
-                  <p className="mt-6 font-semibold text-center text-lg text-white">
-                    {skill.name}
+                  <p className="mt-2 text-center text-sm text-orange-200/75">
+                    {skill.desc}
                   </p>
-                  <p className="mt-2 text-sm opacity-60">{skill.desc}</p>
                 </div>
               );
             })}
